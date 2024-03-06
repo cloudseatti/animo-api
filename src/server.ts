@@ -4,8 +4,14 @@ import { login } from './http/routes/login'
 import { createAddress } from './http/routes/create-address'
 import { CreateUserProfissional } from './http/routes/create-user-profissional'
 import { createUserJuridical } from './http/routes/user-juridical'
+import cors from '@fastify/cors'
 
 const app = fastify()
+
+app.register(cors, {
+     // Configuração para aceitar requisições de qualquer domínio
+     origin: "*", // Use "*" para permitir todas as origens
+});
 
 app.get('/hello', () => {
      return 'Hello world'
