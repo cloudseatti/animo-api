@@ -4,14 +4,21 @@ CREATE TYPE "Gender" AS ENUM ('MALE', 'FEMALE', 'OTHER');
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL,
-    "firstName" TEXT NOT NULL,
+    "name" TEXT NOT NULL,
     "lastName" TEXT NOT NULL,
     "cpf" TEXT NOT NULL,
-    "dateOfBirth" TEXT NOT NULL,
-    "phoneNumber" TEXT NOT NULL,
+    "dateOfBirth" TIMESTAMP(3) NOT NULL,
+    "telefoneCelular" TEXT NOT NULL,
+    "cep" TEXT NOT NULL,
+    "uf" TEXT NOT NULL,
+    "cidade" TEXT NOT NULL,
+    "bairro" TEXT NOT NULL,
+    "logradouro" TEXT NOT NULL,
+    "numero" TEXT NOT NULL,
+    "complemento" TEXT,
     "email" TEXT NOT NULL,
-    "password" INTEGER NOT NULL,
-    "offersOfEmail" BOOLEAN NOT NULL,
+    "password" TEXT NOT NULL,
+    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -85,6 +92,12 @@ CREATE TABLE "Services" (
 
     CONSTRAINT "Services_pkey" PRIMARY KEY ("id")
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_cpf_key" ON "User"("cpf");
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- AddForeignKey
 ALTER TABLE "Address" ADD CONSTRAINT "Address_serviceID_fkey" FOREIGN KEY ("serviceID") REFERENCES "Services"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
