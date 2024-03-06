@@ -1,0 +1,92 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Gender {
+  MALE
+  FEMALE
+  OTHER
+}
+
+model User {
+  id            String  @id @default(uuid())
+  firstName     String
+  lastName      String
+  cpf           String
+  dateOfBirth   String
+  phoneNumber   String
+  email         String
+  password      Int
+  offersOfEmail Boolean
+}
+
+model UserProfissional {
+  id            String  @id @default(uuid())
+  firstName     String
+  lastName      String
+  cpf           String
+  dateOfBirth   String
+  phoneNumber   String
+  cro           String
+  categoryCro   String
+  email         String
+  password      Int
+  offersOfEmail Boolean
+}
+
+model UserJuridical {
+  id              String  @id @default(uuid())
+  firstName       String
+  lastName        String
+  cnpj            String
+  dateOfBirth     String
+  phoneNumber     String
+  cro             String
+  categoryCro     String
+  email           String
+  password        Int
+  offersOfEmail   Boolean
+  fantasyName     String
+  corporateReason String
+}
+
+model Address {
+  id             String    @id @default(uuid())
+  cep            String
+  publicPlace    String
+  number         Int
+  complemnet     String
+  neighborhood   String
+  city           String
+  state          String
+  referencePonit String
+  notes          String
+  serviceID      String
+  services       Services? @relation(fields: [serviceID], references: [id])
+}
+
+model Services {
+  id                 String    @id @default(uuid())
+  patientName        String
+  patientLastName    String
+  patientDateOfBirth String
+  patientCpf         String
+  patientGender      Gender
+  addressId          String
+  address            Address[]
+  group              String
+  product            String
+  toothSelect        String
+  observation        String
+}
