@@ -9,7 +9,6 @@ import cors from '@fastify/cors'
 const app = fastify()
 
 app.register(cors, {
-     // Configuração para aceitar requisições de qualquer domínio
      origin: "*", // Use "*" para permitir todas as origens
 });
 

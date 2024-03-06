@@ -20,15 +20,25 @@ enum Gender {
 }
 
 model User {
-  id            String  @id @default(uuid())
-  firstName     String
-  lastName      String
-  cpf           String
-  dateOfBirth   String
-  phoneNumber   String
-  email         String
-  password      Int
-  offersOfEmail Boolean
+  id              String   @id @default(uuid())
+  name            String
+  lastName        String
+  cpf             String   @unique
+  dateOfBirth     DateTime
+  telefoneCelular String
+  cep             String
+  uf              String
+  cidade          String
+  bairro          String
+  logradouro      String
+  numero          String
+  complemento     String? // O sinal de interrogação indica que este campo é opcional
+  email           String   @unique
+  // O campo confirmEmail não é necessário no banco de dados, pois a confirmação geralmente é um processo de frontend ou controle de fluxo
+  password        String
+  createdAt       DateTime @default(now())
+  // O campo confirmPassword também não é necessário no banco de dados por razões similares ao confirmEmail
+  // Campos de confirmação são geralmente usados apenas em lógicas de aplicativo para verificar se o usuário digitou corretamente
 }
 
 model UserProfissional {
